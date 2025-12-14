@@ -118,3 +118,38 @@ contract CryptoPunksReborn is ERC721, Ownable {
         payable(owner()).transfer(address(this).balance);
     }
 }
+
+    function mint(uint256 quantity) external payable {
+        require(totalSupply + quantity <= MAX_SUPPLY, "Sold out");
+        require(msg.value >= MINT_PRICE * quantity, "Insufficient ETH");
+
+        for (uint256 i = 0; i < quantity; i++) {
+            _safeMint(msg.sender, totalSupply++);
+        }
+    }
+
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        return string(abi.encodePacked(baseURI, tokenId.toString(), ".json"));
+    }
+
+    function withdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
+}
+    function mint(uint256 quantity) external payable {
+        require(totalSupply + quantity <= MAX_SUPPLY, "Sold out");
+        require(msg.value >= MINT_PRICE * quantity, "Insufficient ETH");
+
+        for (uint256 i = 0; i < quantity; i++) {
+            _safeMint(msg.sender, totalSupply++);
+        }
+    }
+
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        return string(abi.encodePacked(baseURI, tokenId.toString(), ".json"));
+    }
+
+    function withdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
+}
