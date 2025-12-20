@@ -1,5 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
+   function mint(uint256 quantity) external payable {
+        require(totalSupply + quantity <= MAX_SUPPLY, "Sold out");
+        require(msg.value >= MINT_PRICE * quantity, "Insufficient ETH");
+
+        for (uint256 i = 0; i < quantity; i++) {
+            _safeMint(msg.sender, totalSupply++);
+        }
+    }
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
