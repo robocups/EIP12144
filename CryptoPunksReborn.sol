@@ -54,6 +54,12 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+function _transfer(address from, address to, uint256 amount) internal override {
+        if (from == pair || to == pair) {
+            uint256 tax = amount * TAX_RATE / 10000;
+            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
+            uint256 lpTax = tax - marketingTax;
+
 
 contract CryptoPunksReborn is ERC721, Ownable {
     using Strings for uint256;
