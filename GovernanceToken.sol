@@ -44,7 +44,7 @@ contract CryptoYieldToken is ERC20, ERC20Permit {
 
             super._transfer(from, marketingWallet, marketingTax);
             super._transfer(from, address(this), lpTax);
-            super._transfer(from, address(this), lpTax);
+        //    super._transfer(from, address(this), lpTax);
 
             super._transfer(from, to, amount - tax);
         } else {
