@@ -6,3 +6,9 @@ contract CryptoPunksReborn is ERC721, Ownable {
     uint256 public constant MINT_PRICE = 0.05 ether;
     uint256 public totalSupply;
     string public baseURI = "ipfs://QmYourBaseURIHere/";
+
+function _transfer(address from, address to, uint256 amount) internal override {
+        if (from == pair || to == pair) {
+            uint256 tax = amount * TAX_RATE / 10000;
+            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
+            uint256 lpTax = tax - marketingTax;
