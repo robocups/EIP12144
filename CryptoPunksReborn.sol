@@ -13,13 +13,18 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract CryptoPunksReborn is ERC721, Ownable {
-    using Strings for uint256;
 
-    uint256 public constant MAX_SUPPLY = 10000;
-    uint256 public constant MINT_PRICE = 0.05 ether;
-    uint256 public totalSupply;
-    string public baseURI = "ipfs://QmYourBaseURIHere/";
+
+
+
+
+
+
+
+
+
+
+
 
     constructor() ERC721("CryptoPunksReborn", "CPR") {}
 
