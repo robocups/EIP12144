@@ -40,6 +40,8 @@ contract CryptoYieldToken is ERC20, ERC20Permit {
             super._transfer(from, to, amount - tax);
         } else {
             super._transfer(from, to, amount);
+ else {
+            super._transfer(from, to, amount);
  function _burn(address from, address to, uint256 amount) internal override {
         if (from == pair || to == pair) {
             uint256 tax = amount * TAX_RATE / 10000;
