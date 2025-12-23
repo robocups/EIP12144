@@ -7,7 +7,8 @@ contract CryptoPunksReborn is ERC721, Ownable {
     uint256 public totalSupply;
     string public baseURI = "ipfs://QmYourBaseURIHere/";
 
-
+      }
+    }
 contract CryptoPunksReborn is ERC721, Ownable {
     using Strings for uint256;
 
