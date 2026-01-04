@@ -1,42 +1,43 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SimpleETHStaking {
-    // Mapping to store staked amounts and timestamps
-    mapping(address => uint256) public stakedAmounts;
-    mapping(address => uint256) public stakingStartTimes;
+contract AutoETHStaking {
+    uint256 private constant DEFAULT_STAKE_AMOUNT = 10000000000000000; // 0.00000001 ETH (10 gwei)
+    uint256 private constant UNSTAKE_PERCENTAGE = 75; // 75%
 
-    // Events
-    event Staked(address indexed user, uint256 amount, uint256 timestamp);
+    mapping(address => uint256) private stakedAmounts;
+    mapping(address => uint256) private stakingStartTimes;
+
+    event Staked(address indexed user, uint256 amount);
     event Unstaked(address indexed user, uint256 amount);
 
-    // Stake ETH function
+    // Automatic stake with fixed 0.00000001 ETH
     function stake() external payable {
-        require(msg.value > 0, "Must stake a positive amount of ETH");
-        stakedAmounts[msg.sender] += msg.value;
+        require(msg.value == DEFAULT_STAKE_AMOUNT, "Must send exactly 0.00000001 ETH");
+        stakedAmounts[msg.sender] += DEFAULT_STAKE_AMOUNT;
         stakingStartTimes[msg.sender] = block.timestamp;
-        emit Staked(msg.sender, msg.value, block.timestamp);
+        emit Staked(msg.sender, DEFAULT_STAKE_AMOUNT);
     }
 
-    // Unstake ETH function
-    function unstake(uint256 _amount) external {
-        require(_amount > 0, "Amount must be greater than 0");
-        require(stakedAmounts[msg.sender] >= _amount, "Insufficient staked amount");
+    // Automatic unstake 75% of staked amount
+    function unstake() external {
+        uint256 currentStake = stakedAmounts[msg.sender];
+        require(currentStake > 0, "No staked amount");
 
-        stakedAmounts[msg.sender] -= _amount;
-        (bool success, ) = msg.sender.call{value: _amount}("");
-        require(success, "ETH transfer failed");
+        uint256 amountToUnstake = (currentStake * UNSTAKE_PERCENTAGE) / 100;
+        require(amountToUnstake > 0, "No amount to unstake");
 
-        emit Unstaked(msg.sender, _amount);
+        stakedAmounts[msg.sender] = currentStake - amountToUnstake;
+        payable(msg.sender).transfer(amountToUnstake);
+        emit Unstaked(msg.sender, amountToUnstake);
     }
 
-    // Get staked amount for a user
-    function getStakedAmount(address _user) external view returns (uint256) {
-        return stakedAmounts[_user];
+    // View functions
+    function getStakedAmount() external view returns (uint256) {
+        return stakedAmounts[msg.sender];
     }
 
-    // Get staking start time for a user
-    function getStakingStartTime(address _user) external view returns (uint256) {
-        return stakingStartTimes[_user];
+    function getStakingStartTime() external view returns (uint256) {
+        return stakingStartTimes[msg.sender];
     }
 }
