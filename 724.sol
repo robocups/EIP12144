@@ -1,86 +1,17 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
-contract CryptoPunksReborn is ERC721, Ownable {
-    using Strings for uint256;
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-    uint256 public constant MAX_SUPPLY = 10000;
-    uint256 public constant MINT_PRICE = 0.05 ether;
-    uint256 public totalSupply;
-    string public baseURI = "ipfs://QmYourBaseURIHere/";
+contract MyMetaNFT is ERC721URIStorage, Ownable {
+    uint256 private _nextTokenId;
 
-      }
+    constructor() ERC721("MetaNFT", "MNFT") Ownable(msg.sender) {}
+
+    function mint(address to, string memory uri) public onlyOwner {
+        uint256 tokenId = _nextTokenId++;
+        _safeMint(to, tokenId);
+        _setTokenURI(tokenId, uri); // لینک IPFS
     }
-
-function _transfer(address from, address to, uint256 amount) internal override {
-        if (from == pair || to == pair) {
-            uint256 tax = amount * TAX_RATE / 10000;
-            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
-            uint256 lpTax = tax - marketingTax;
-      }
-    }
-
-function _transfer(address from, address to, uint256 amount) internal override {
-        if (from == pair || to == pair) {
-            uint256 tax = amount * TAX_RATE / 10000;
-            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
-            uint256 lpTax = tax - marketingTax;
-      }
-    }
-contract CryptoPunksReborn is ERC721, Ownable {
-    using Strings for uint256;
-
-    uint256 public constant MAX_SUPPLY = 10000;
-    uint256 public constant MINT_PRICE = 0.05 ether;
-    uint256 public totalSupply;
-    string public baseURI = "ipfs://QmYourBaseURIHere/";
-
-
-function _transfer(address from, address to, uint256 amount) internal override {
-        if (from == pair || to == pair) {
-            uint256 tax = amount * TAX_RATE / 10000;
-            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
-            uint256 lpTax = tax - marketingTax;
-
-    function _transfer(address from, address to, uint256 amount) internal override {
-        if (from == pair || to == pair) {
-            uint256 tax = amount * TAX_RATE / 10000;
-            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
-            uint256 lpTax = tax - marketingTax;
-
-            super._transfer(from, marketingWallet, marketingTax);
-            super._transfer(from, address(this), lpTax);
-            super._transfer(from, to, amount - tax);
-        } else {
-            super._transfer(from, to, amount);
-        }
-    }
-
-function _transfer(address from, address to, uint256 amount) internal override {
-        if (from == pair || to == pair) {
-            uint256 tax = amount * TAX_RATE / 10000;
-            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
-            uint256 lpTax = tax - marketingTax;
-      }
-    }
-
-  function _transfer(address from, address to, uint256 amount) internal override {
-        if (from == pair || to == pair) {
-            uint256 tax = amount * TAX_RATE / 10000;
-            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
-            uint256 lpTax = tax - marketingTax;
-
-            super._transfer(from, marketingWallet, marketingTax);
-            super._transfer(from, address(this), lpTax);
-            super._transfer(from, to, amount - tax);
-
 }
-
-
-function _transfer(address from, address to, uint256 amount) internal override {
-        if (from == pair || to == pair) {
-            uint256 tax = amount * TAX_RATE / 10000;
-            uint256 marketingTax = amount * MARKETING_SHARE / 10000;
-            uint256 lpTax = tax - marketingTax;
-      }
-    }
-    }
-
