@@ -1,0 +1,73 @@
+{
+	"compiler": {
+		"version": "0.8.31+commit.fd3a2265"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stake",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "unstake",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"stakbase/firststake.sol": "MicroETHStaking"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"stakbase/firststake.sol": {
+			"keccak256": "0xd42b55bb0cde80c55ccff32d454934fde99c16cf4fd63abf86b29938720f4966",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3b166cf83886636fb5b1b487d16774b0aeb393ffa2e6b3c9abb1cbb461346a59",
+				"dweb:/ipfs/QmUUpi2bz7zBgibSCauiF8YeoRrf7uzPXK91ESkeJsg1MM"
+			]
+		}
+	},
+	"version": 1
+}
